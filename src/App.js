@@ -45,9 +45,15 @@ function App() {
       
 
     })
-    
-
   },[]);
+
+  useEffect(()=>{
+    if(fromCurrency!=null && toCurrency!=null){  
+      fetch(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
+      .then(response=>response.json())
+      .then(data=>setExchangeRate(data.rates[toCurrency]))
+    }
+  },[fromCurrency,toCurrency]);
   
   return (
     <div>
